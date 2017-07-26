@@ -146,13 +146,12 @@ SETTINGS.SCENARIO.MODEM{2}.LLR_METHOD = enum.modem.LlrMethod.IDEAL_AWGN;
 % src\+enum\+modem\LlrMethod.m
 
 
-
 % ========================================================================
 %                       Channel Parameters
 % ========================================================================
 
 % multipath channel model
-SETTINGS.CHANNEL.MULTIPATH.MODEL = enum.channel.MultipathModel.NONE;
+SETTINGS.CHANNEL.MULTIPATH.MODEL = enum.channel.MultipathModel.COST259;
 % A list of permitted values may be found at:
 % src\+enum\+channel\MultipathModel.m
 

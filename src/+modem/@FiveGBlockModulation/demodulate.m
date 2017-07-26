@@ -1,4 +1,4 @@
-   function frameReceived  = demodulate( this, serialReceivedSignal )
+function frameReceived  = demodulate( this, serialReceivedSignal )
 %FIVEGBLOCKMODULATION.DEMODULATE demodulates 5G frame 
 %   Detailed explanation is given in the BlockModulation class header.
 %   
@@ -31,31 +31,15 @@ end
 frameReceived  = zeros ( numberOfSubcarriers, ...
                          this.frame.numberOfUsefulBlocks, ...
                          this.numberOfAntennas );
-%RF Impairments object %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-rf = modem.RFImpairments;
 
 %Receives the frame for each antenna                     
 for antCount = 1 : this.numberOfAntennas 
 
     % eliminate guard periods
     rxSignal = serialReceivedSignal( this.usefulSamplesIndex, antCount );
-    
-    
-    %IQ Imbalance %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    if(this.rfImpairments.IQ.ENABLE)
-        rxSignal = rf.IQImbalance(rxSignal, ...
-                       this.rfImpairments.IQ.AMP, this.rfImpairments.IQ.PHASE);        
-    end
-    
-    % reshape, make each symbol a column
-        
-     % Phase noise %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-     
-     if(this.rfImpairments.PHASE_NOISE.ENABLE)
-         rxSignal = rf.phaseNoise(rxSignal, this.rfImpairments.PHASE_NOISE.VARIANCE); 
-     end          
-                              
+        % reshape, make each symbol a column
+          
+                    
         if this.waveform == enum.modem.fiveG.Waveform.OFDM
             % remove cyclic prefix
             rxSignal = reshape( rxSignal, this.samplesInSymbol, ...

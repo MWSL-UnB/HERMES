@@ -56,7 +56,6 @@ properties ( GetAccess = 'public', SetAccess = 'protected')
     subcarrierSpacing
     usefulSubcarriers
     fofdmFilterInTime
-    rfImpairments
     
 end
 
@@ -87,8 +86,6 @@ methods (Access = public)
 
         this.subcarrierFreqMap = []; %Initialize the Carrier Freq. Map                              
         this.samplingRate = FIVEG.SUBCARRIER_SPACING * FIVEG.FFT_SIZE;
-        
-        this.rfImpairments = FIVEG.RFIMPAIRMENTS;
 
         % Attribute the number of Subcarriers to be transmitted
         % Map the used subcarriers into frequencies
