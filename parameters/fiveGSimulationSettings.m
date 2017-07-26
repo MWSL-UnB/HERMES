@@ -31,7 +31,7 @@ FIVEG.FFT_SIZE = 2048;
 FIVEG.USEFUL_SUBCARRIERS = 1650;
 
 % waveform, see allowed values in +enum/+modem/+fiveG/Waveform.m
-FIVEG.WAVEFORM.TYPE = enum.modem.fiveG.Waveform.OFDM;
+FIVEG.WAVEFORM.TYPE = enum.modem.fiveG.Waveform.FOFDM;
 
 % OFDM parameters,
 % samples in cyclic prefix
@@ -49,10 +49,30 @@ FIVEG.WAVEFORM.FBMC.FILTER_TAIL = FIVEG.FFT_SIZE/2;
 
 % MIMO settings
 % see src/+enum/+modem/MimoScheme.m
-FIVEG.MIMO_SCHEME = enum.modem.MimoScheme.NONE;
+FIVEG.MIMO_SCHEME = enum.modem.MimoScheme.TRANSMIT_DIVERSITY;
 
-%%
-% Define frame structure
+%% Define RF Impairments parameters
+
+% RF Impairments - HPA parameters
+FIVEG.RFIMPAIRMENTS.HPA.ENABLE = 0;
+FIVEG.RFIMPAIRMENTS.HPA.P = 2; % Parameter p
+FIVEG.RFIMPAIRMENTS.HPA.V = 1; % Parameter v
+FIVEG.RFIMPAIRMENTS.HPA.IBO = 3; % Input back-off in dB
+
+% RF Impairments - HPA with memory parameters
+FIVEG.RFIMPAIRMENTS.MEM_HPA.ENABLE = 0;
+FIVEG.RFIMPAIRMENTS.MEM_HPA.DELAY = 1; % Delay in samples
+
+% RF Impairments - I/Q imbalance parameters
+FIVEG.RFIMPAIRMENTS.IQ.ENABLE = 0;
+FIVEG.RFIMPAIRMENTS.IQ.AMP = 0.03; % Perturbation amplitude 
+FIVEG.RFIMPAIRMENTS.IQ.PHASE = 0.03; % Perturbation phase 
+
+% RF Impairments - Phase noise parameters
+FIVEG.RFIMPAIRMENTS.PHASE_NOISE.ENABLE = 0;
+FIVEG.RFIMPAIRMENTS.PHASE_NOISE.VARIANCE = 0.1; % Variance of the phase noise
+
+%% Define frame structure
 
 % frameType, see allowed values in +enum/+modem/+fiveG/FrameType.m
 FIVEG.FRAME_TYPE = enum.modem.fiveG.FrameType.DOWNLINK;
@@ -89,7 +109,7 @@ FIVEG.TRANSPORT_BLOCK_SIZE_BITS = 4000;
 
 
 %% Define MCS Parameters.
-FIVEG.MCS = 10;  % See Table in lookupTables.modem.fiveG.getMcsParam
+FIVEG.MCS = 2;  % See Table in lookupTables.modem.fiveG.getMcsParam %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 FIVEG.CODE.TYPE = enum.modem.CodeType.TURBO;
 FIVEG.CODE.TURBO.ITERATIONS = 4;
 

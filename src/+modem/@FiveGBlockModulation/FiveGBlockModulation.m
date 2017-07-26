@@ -53,6 +53,10 @@ properties ( GetAccess = 'public', SetAccess = 'protected')
     samplesInTail = []
     filterTail = []
     prototypeFilter
+    subcarrierSpacing
+    usefulSubcarriers
+    fofdmFilterInTime
+    rfImpairments
     
 end
 
@@ -78,9 +82,13 @@ methods (Access = public)
         this.fftMaxSize = FIVEG.FFT_SIZE;
         this.fftSize = this.fftMaxSize;
         
+        this.subcarrierSpacing = FIVEG.SUBCARRIER_SPACING;
+        this.usefulSubcarriers = FIVEG.USEFUL_SUBCARRIERS;
 
         this.subcarrierFreqMap = []; %Initialize the Carrier Freq. Map                              
         this.samplingRate = FIVEG.SUBCARRIER_SPACING * FIVEG.FFT_SIZE;
+        
+        this.rfImpairments = FIVEG.RFIMPAIRMENTS;
 
         % Attribute the number of Subcarriers to be transmitted
         % Map the used subcarriers into frequencies
@@ -103,6 +111,7 @@ methods (Access = public)
                 this.samplesInSymbol = FIVEG.FFT_SIZE;
                 this.samplesInTail = FIVEG.WAVEFORM.ZT_DS_OFDM.TAIL;
                 this.samplesInPrefix = FIVEG.WAVEFORM.ZT_DS_OFDM.HEAD;
+                
             case enum.modem.fiveG.Waveform.FBMC
                 [this.prototypeFilter.filter, ...
                  this.prototypeFilter.filterParameters] = ...
@@ -112,8 +121,14 @@ methods (Access = public)
                 this.filterTail = FIVEG.WAVEFORM.FBMC.FILTER_TAIL;
                 this.samplesInSymbol = FIVEG.FFT_SIZE * ( delaySamples ) + ...
                                        FIVEG.FFT_SIZE/2 + ...
-                                       this.filterTail/this.frame.numberOfUsefulBlocks;                                 
-            
+                                       this.filterTail/this.frame.numberOfUsefulBlocks;
+                                              
+            case enum.modem.fiveG.Waveform.FOFDM
+                this.samplesInSymbol = FIVEG.FFT_SIZE + ...
+                                       FIVEG.WAVEFORM.OFDM.CYCLIC_PREFIX;
+                this.samplesInPrefix = FIVEG.WAVEFORM.OFDM.CYCLIC_PREFIX;
+                this.fofdmFilterInTime = fofdmFilter(this, this.fftSize);
+                
             otherwise
                 error('waveform not supported')
         end
@@ -150,6 +165,8 @@ methods (Access = public)
     [receivedSignal, polyphaseAnalysisFilter ] = analysisFilterBank( this, serialReceivedSignal );
     oqamModSignal = oqamPreProcessing(this, dataSymbols );
     oqamDemodSignal = oqamPostProcessing(this, oqamSymbols );
+    
+   
 
     
     
