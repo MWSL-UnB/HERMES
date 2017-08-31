@@ -21,6 +21,9 @@ end
 % initialize frame
 modulatedSignal = zeros( this.samplesInFrame, this.numberOfAntennas );
 
+%RF Impairments object
+rf = modem.RFImpairments;
+
               
 % perform modulation
 switch this.waveform
@@ -36,8 +39,7 @@ switch this.waveform
                          signalInTime ];
         
         signalInTime = reshape( signalInTime, numel( signalInTime ), 1 );
-        
-        
+
     case enum.modem.fiveG.Waveform.ZT_DS_OFDM
         usefulSamples = this.frame.numberOfUsefulBlocks;
         % include zero tail and head
@@ -89,15 +91,44 @@ switch this.waveform
         
         % Passing the signal through the filter
         signalInTime = conv(signalInTime, this.fofdmFilterInTime); % Filtering
-        signalInTime = signalInTime(this.fftSize/2:length(signalInTime)-this.fftSize/2); % Removing the expanded samples after filtering
+        signalInTime = signalInTime(this.fftSize/2:length(signalInTime)-this.fftSize/2); % Removing the expanded samples after filtering                
+        
 
 end
 
 
+% include non-linear power aplifier in the transmitter.
+
+if(this.rfImpairments.HPA.ENABLE && ~this.rfImpairments.MEM_HPA.ENABLE)
+    signalInTime = rf.HPA(signalInTime, this.rfImpairments.HPA.P, ...
+                   this.rfImpairments.HPA.V, this.rfImpairments.HPA.IBO);
+end
+
+%
+
+% include IQ Imbalance
+
+if(this.rfImpairments.IQ.ENABLE)
+    signalInTime = rf.IQImbalance(signalInTime, ...
+                   this.rfImpairments.IQ.AMP, this.rfImpairments.IQ.PHASE);        
+end
+
+% Passing the signal through a nonlinear HPA with memory
+
+if(this.rfImpairments.MEM_HPA.ENABLE && ~this.rfImpairments.HPA.ENABLE)
+    signalInTime = rf.MemHPA(signalInTime, this.rfImpairments.MEM_HPA.DELAY); 
+end
+
+ 
+% Signal's spectrum ========================================================
+%[signalSpec, frequencies] = pwelch(signalInTime, [], [], this.fftSize, this.samplingRate); 
+%signalSpec = fftshift(signalSpec);
+% semilogy(f, signalSpec);
+% xlabel('Frequencies')
+% ylabel('Magnitude')
+% grid on
+% 
+% ==========================================================================
+
 % include useful data in frame
 modulatedSignal( this.usefulSamplesIndex, : ) = signalInTime;
-
-
-             
-
-
