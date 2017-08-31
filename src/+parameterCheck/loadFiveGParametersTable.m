@@ -99,6 +99,8 @@ paramTable.addParameter( 'RFIMPAIRMENTS.PHASE_NOISE', 'struct');
 paramTable.addParameter( 'RFIMPAIRMENTS.PHASE_NOISE.ENABLE', 'uint32');
 
 paramTable.addParameter( 'RFIMPAIRMENTS.PHASE_NOISE.VARIANCE', 'double');
+
+paramTable.addParameter( 'RFIMPAIRMENTS.PHASE_NOISE.RATIO', 'double');
                      
 paramTable.addParameter( 'FRAME_TYPE', 'enum.modem.fiveG.FrameType', ...
                          enum.parameterCheck.Property.IS_MANDATORY );

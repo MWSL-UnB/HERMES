@@ -53,7 +53,9 @@ for antCount = 1 : this.numberOfAntennas
      % Phase noise %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
      
      if(this.rfImpairments.PHASE_NOISE.ENABLE)
-         rxSignal = rf.phaseNoise(rxSignal, this.rfImpairments.PHASE_NOISE.VARIANCE); 
+         rxSignal = rf.phaseNoise(rxSignal, this.rfImpairments.PHASE_NOISE.VARIANCE, ...
+                                    this.rfImpairments.PHASE_NOISE.RATIO, this.subcarrierSpacing, ...
+                                    this.fftSize); 
      end          
                               
         if this.waveform == enum.modem.fiveG.Waveform.OFDM

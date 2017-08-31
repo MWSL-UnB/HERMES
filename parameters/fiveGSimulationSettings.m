@@ -31,7 +31,7 @@ FIVEG.FFT_SIZE = 2048;
 FIVEG.USEFUL_SUBCARRIERS = 1650;
 
 % waveform, see allowed values in +enum/+modem/+fiveG/Waveform.m
-FIVEG.WAVEFORM.TYPE = enum.modem.fiveG.Waveform.FOFDM;
+FIVEG.WAVEFORM.TYPE = enum.modem.fiveG.Waveform.OFDM;
 
 % OFDM parameters,
 % samples in cyclic prefix
@@ -49,7 +49,7 @@ FIVEG.WAVEFORM.FBMC.FILTER_TAIL = FIVEG.FFT_SIZE/2;
 
 % MIMO settings
 % see src/+enum/+modem/MimoScheme.m
-FIVEG.MIMO_SCHEME = enum.modem.MimoScheme.TRANSMIT_DIVERSITY;
+FIVEG.MIMO_SCHEME = enum.modem.MimoScheme.NONE;
 
 %% Define RF Impairments parameters
 
@@ -70,7 +70,8 @@ FIVEG.RFIMPAIRMENTS.IQ.PHASE = 0.03; % Perturbation phase
 
 % RF Impairments - Phase noise parameters
 FIVEG.RFIMPAIRMENTS.PHASE_NOISE.ENABLE = 0;
-FIVEG.RFIMPAIRMENTS.PHASE_NOISE.VARIANCE = 0.1; % Variance of the phase noise
+FIVEG.RFIMPAIRMENTS.PHASE_NOISE.VARIANCE = 1.33; % Variance of the phase noise
+FIVEG.RFIMPAIRMENTS.PHASE_NOISE.RATIO = 2.5; % Phase noise bandwidth over the subcarrier spacing
 
 %% Define frame structure
 
