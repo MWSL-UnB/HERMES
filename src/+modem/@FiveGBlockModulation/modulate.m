@@ -14,7 +14,7 @@ function modulatedSignal = modulate( this, transmittedFrame )
 %   permission of INDT, or in accordance with the terms and conditions
 %   stipulated in the agreement/contract under which the program has been
 
-if (this.numberOfAntennas > 1)
+if (this.numberOfAntennas > 2)
     error('number of antennas not supported')
 end
 
@@ -28,18 +28,48 @@ rf = modem.RFImpairments;
 % perform modulation
 switch this.waveform
     case enum.modem.fiveG.Waveform.OFDM
-        % map frame to FFT
-        signalInFreq = zeros( this.fftSize, ...
+        if(this.numberOfAntennas == 1)
+            % map frame to FFT
+            signalInFreq = zeros( this.fftSize, ...
                               this.frame.numberOfUsefulBlocks );
-        signalInFreq( this.subcarrierFreqMap, :, : ) = transmittedFrame;
+            signalInFreq( this.subcarrierFreqMap, :, : ) = transmittedFrame;
 
-        % apply IFFT and add cyclic prefix
-        signalInTime = ifft( signalInFreq );
-        signalInTime = [ signalInTime( end - this.samplesInPrefix + 1 : end, : ); ...
-                         signalInTime ];
+            % apply IFFT and add cyclic prefix
+            signalInTime = ifft( signalInFreq );
+            signalInTime = [ signalInTime( end - this.samplesInPrefix + 1 : end, : ); ...
+                            signalInTime ];
         
-        signalInTime = reshape( signalInTime, numel( signalInTime ), 1 );
-
+            signalInTime = reshape( signalInTime, numel( signalInTime ), 1 );
+        elseif(this.numberOfAntennas == 2)
+            % recovering the frames to be transmitted by the 2 antennas
+            txFrame1 = transmittedFrame(:, 1:this.frame.numberOfUsefulBlocks);
+            txFrame2 = transmittedFrame(:, this.frame.numberOfUsefulBlocks+1:end);
+            
+            % map frame to FFT
+            signalInFreq1 = zeros( this.fftSize, ...
+                              this.frame.numberOfUsefulBlocks );
+            signalInFreq1( this.subcarrierFreqMap, :, : ) = txFrame1; 
+            signalInFreq2 = zeros( this.fftSize, ...
+                              this.frame.numberOfUsefulBlocks );
+            signalInFreq2( this.subcarrierFreqMap, :, : ) = txFrame2; 
+            
+            % apply IFFT and add cyclic prefix
+            signalInTime1 = ifft( signalInFreq1 );
+            signalInTime1 = [ signalInTime1( end - this.samplesInPrefix + 1 : end, : ); ...
+                            signalInTime1 ];
+            signalInTime2 = ifft( signalInFreq2 );
+            signalInTime2 = [ signalInTime2( end - this.samplesInPrefix + 1 : end, : ); ...
+                            signalInTime2 ];
+            
+            signalInTime1 = reshape( signalInTime1, numel( signalInTime1 ), 1 ); % to be transmitted by antenna 1
+            signalInTime2 = reshape( signalInTime2, numel( signalInTime2 ), 1 ); % to be transmitted by antenna 2
+            
+            % merging the signals transmitted by the 2 antennas
+            signalInTime = [signalInTime1, signalInTime2];
+        else
+            display('This number of TX antennas is not supported');
+        end
+        
     case enum.modem.fiveG.Waveform.ZT_DS_OFDM
         usefulSamples = this.frame.numberOfUsefulBlocks;
         % include zero tail and head

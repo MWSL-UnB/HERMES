@@ -61,7 +61,7 @@ switch this.demodulator.waveform
             sum ( ( real(coefficients).^2 + imag(coefficients).^2 ) );
         noiseVariancePerSymbol = repmat( noiseVariancePerBlock, ...
                                          usefulDataLength, 1 );
-    %FOFDM not implemented                                 
+                                    
     case enum.modem.fiveG.Waveform.FOFDM
         
         noiseVariancePerSymbol = fftSize * noiseVariance .* ...

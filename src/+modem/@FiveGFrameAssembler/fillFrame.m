@@ -51,7 +51,7 @@ switch this.numberOfAntennas
         txFrame(:, guardBlocks ) = [];  
                       
     case 2 %%%%% PARTIALLY COMPLETE
-                this.usedSymbols = length(dataVector);
+        this.usedSymbols = length(dataVector);
         %Assign data Symbols to the positions
         txFrame( this.dataPositions( 1 : this.usedSymbols ) ) = dataVector; 
         
