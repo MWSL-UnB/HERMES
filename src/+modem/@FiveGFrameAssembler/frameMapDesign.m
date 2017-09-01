@@ -90,7 +90,71 @@ switch( this.numberOfAntennas )
                 
         this.availableControlSymbols = length( this.controlPositions );
 
+    case 2 %%% PARTIALLY COMPLETE
+        this.numberOfBlocks = sum ( this.fieldLength );
+        
+        % create frameMap, i.e., define which kind of information is
+        % transmitted at each symbol/subcarrier
+        this.frameMap( 1:this.blockSize, 1:this.numberOfBlocks ) = ...              
+                                    enum.modem.fiveG.FrameMap.EMPTY_SYMBOL;
+        symbol = 1;
+        for field = 1 : length ( this.frameFields )
+            % verify information type for each symbol, assign all
+            % subcarriers in the symbol to a given type
+            lastSymbol = symbol + this.fieldLength( field ) - 1;
+            this.frameMap( :, symbol : lastSymbol) = this.frameFields( field );
+            symbol = lastSymbol + 1;
+        end
+        
+        % calculate number of modulation blocks allocated to each type
+        % consider that each symbol ha sonly one kind of information 
+        this.numberOfDlControlBlocks = sum ( this.frameMap(1,:) == ...
+            enum.modem.fiveG.FrameMap.DL_CONTROL );
+        this.numberOfUlControlBlocks = sum ( this.frameMap (1,:) == ...
+            enum.modem.fiveG.FrameMap.UL_CONTROL );
+        this.numberOfReferenceBlocks = sum ( this.frameMap (1,:) == ...
+            enum.modem.fiveG.FrameMap.REF_SIGNAL );
+        this.numberOfDataBlocks = sum ( this.frameMap (1,:) == ...
+            enum.modem.fiveG.FrameMap.DATA );
+        this.numberOfUsefulBlocks = this.numberOfDlControlBlocks + ...
+                                    this.numberOfUlControlBlocks + ...
+                                    this.numberOfReferenceBlocks + ...
+                                    this.numberOfDataBlocks;
+        
+        this.numberOfGuardPeriods = sum ( this.frameMap (1,:) == ...
+                                          enum.modem.fiveG.FrameMap.GUARD );
+        
+        % calculate frame duration
+        this.duration = this.numberOfUsefulBlocks * this.symbolLength + ...
+                        this.guardLength * this.numberOfGuardPeriods;
+             
+        this.availableDataSymbols = this.numberOfDataBlocks * ...
+                                    this.blockSize;
+        
+        % get indices of data symbols
+        this.dataPositions = find ( this.frameMap == ...
+                                    enum.modem.fiveG.FrameMap.DATA );
                            
+        % get indices of control symbols
+        switch this.frameType
+            case enum.modem.fiveG.FrameType.DOWNLINK
+                this.controlPositions = find ( this.frameMap == ...
+                    enum.modem.fiveG.FrameMap.DL_CONTROL );
+            case enum.modem.fiveG.FrameType.UPLINK;
+                this.controlPositions = find ( this.frameMap == ...
+                    enum.modem.fiveG.FrameMap.UL_CONTROL );                
+            otherwise
+                error('invalid link')
+        end
+        
+        % get indices of reference symbols
+        this.refPositions = find ( this.frameMap == ...
+                    enum.modem.fiveG.FrameMap.REF_SIGNAL );
+                
+                
+        this.availableControlSymbols = length( this.controlPositions );
+
+                       
     otherwise
         error('number of antennas not supported')
 end

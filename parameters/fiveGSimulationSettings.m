@@ -71,7 +71,7 @@ FIVEG.RFIMPAIRMENTS.IQ.PHASE = 0.03; % Perturbation phase
 % RF Impairments - Phase noise parameters
 FIVEG.RFIMPAIRMENTS.PHASE_NOISE.ENABLE = 0;
 FIVEG.RFIMPAIRMENTS.PHASE_NOISE.VARIANCE = 1.33; % Variance of the phase noise
-FIVEG.RFIMPAIRMENTS.PHASE_NOISE.RATIO = 2.5; % Phase noise bandwidth over the subcarrier spacing
+FIVEG.RFIMPAIRMENTS.PHASE_NOISE.RATIO = 2; % Phase noise bandwidth over the subcarrier spacing
 
 %% Define frame structure
 
