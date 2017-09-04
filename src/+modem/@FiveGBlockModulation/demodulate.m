@@ -28,6 +28,8 @@ switch this.waveform
         numberOfSubcarriers = this.frame.blockSize;        
 end
 
+this.numberOfAntennas = 1; %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%TESTE!!!
+
 frameReceived  = zeros ( numberOfSubcarriers, ...
                          this.frame.numberOfUsefulBlocks, ...
                          this.numberOfAntennas );

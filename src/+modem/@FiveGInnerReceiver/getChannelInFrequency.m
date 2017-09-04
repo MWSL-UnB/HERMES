@@ -70,7 +70,8 @@ switch ( this.channelEstimationAlgo )
                     
                 else
                     % ALTERED 05/Jun/2016
-                    channel = repmat( sampledChannel, nInstants, 1 ).'; 
+                    channel = repmat( sampledChannel, nInstants, 1 );
+                    channel = permute(channel, [2 1 3 4]); % transposing the channel
                 end
             end
         end

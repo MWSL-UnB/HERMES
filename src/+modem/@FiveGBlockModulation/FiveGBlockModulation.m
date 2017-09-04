@@ -97,7 +97,7 @@ methods (Access = public)
                                    this.fftSize , ...
                                    2 : auxFreqShift + 1  ];
                        
-        this.numberOfAntennas = this.frame.numberOfAntennas;
+        this.numberOfAntennas = this.frame.numberOfAntennas; 
         this.centerFrequency = [];
         
         % waveform-specific parameters

@@ -43,6 +43,7 @@ switch this.numberOfAntennas
         
     case 2
         % Not implemented
+        display('erro')
     case 4
         % Not implemented
     case 8

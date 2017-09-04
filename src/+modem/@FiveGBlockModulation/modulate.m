@@ -14,7 +14,7 @@ function modulatedSignal = modulate( this, transmittedFrame )
 %   permission of INDT, or in accordance with the terms and conditions
 %   stipulated in the agreement/contract under which the program has been
 
-if (this.numberOfAntennas > 2)
+if (this.numberOfAntennas > 2) % Edited from 1 to 2
     error('number of antennas not supported')
 end
 

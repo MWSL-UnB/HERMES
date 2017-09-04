@@ -16,15 +16,17 @@ function [ out, impulseResponse, t ] = propagate (this, in, t0)
 %   supplied.
 
 nTx = size( in, 2 );
-if ( nTx ~= this.numberOfTxAntennas )
-    error( 'input vector has wrong number of antennas' );
-end
+%if ( nTx ~= this.numberOfTxAntennas )
+%    error( 'input vector has wrong number of antennas' );
+%end
+% TESTE
+this.numberOfTxAntennas = nTx;
 
 nSamples = size( in, 1 );
 
 this.timeStamp = t0 + nSamples / this.samplingRate;
-impulseResponse0 = eye( this.numberOfRxAntennas, this.numberOfTxAntennas );
-out = ( in * impulseResponse0.' );
+impulseResponse0 = eye( this.numberOfRxAntennas, this.numberOfTxAntennas );%%%%%%%%%%% 
+out = ( in * impulseResponse0.' ); %%%%%%%%%%
 
 frameDuration = nSamples / this.samplingRate;
 t = t0 + ( 0 : this.impulseResponseUpdatePeriod : frameDuration );

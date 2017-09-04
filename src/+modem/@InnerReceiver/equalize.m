@@ -57,6 +57,8 @@ switch this.equalizationAlgo
         
 end
 
+
+
 signalOut = signalIn .* coefficients;
 
 
