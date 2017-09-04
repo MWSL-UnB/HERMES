@@ -107,7 +107,7 @@ SETTINGS.SCENARIO.MODEM{1}.LTE.MCS = 10;
 % SETTINGS.SCENARIO.MODEM{n}.LTE.PARAM1 = Override
 SETTINGS.SCENARIO.MODEM{2}.LTE = SETTINGS.SCENARIO.MODEM{1}.LTE;
 %Define the number of Antennas per Modem.
-SETTINGS.SCENARIO.MODEM{ 1 }.NUMBER_OF_ANTENNAS = 1;
+SETTINGS.SCENARIO.MODEM{ 1 }.NUMBER_OF_ANTENNAS = 2;
 SETTINGS.SCENARIO.MODEM{ 2 }.NUMBER_OF_ANTENNAS = 1;
 
 SETTINGS.SCENARIO.MODEM{ 1 }.ANTENNA_POSITION = [0 0 0];
@@ -152,7 +152,7 @@ SETTINGS.SCENARIO.MODEM{2}.LLR_METHOD = enum.modem.LlrMethod.IDEAL_AWGN;
 % ========================================================================
 
 % multipath channel model
-SETTINGS.CHANNEL.MULTIPATH.MODEL = enum.channel.MultipathModel.NONE;
+SETTINGS.CHANNEL.MULTIPATH.MODEL = enum.channel.MultipathModel.GENERIC;
 % A list of permitted values may be found at:
 % src\+enum\+channel\MultipathModel.m
 

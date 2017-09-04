@@ -20,9 +20,11 @@ function [ out, ...
 %   supplied.
 
 
-if ( size( in, 2 ) ~= this.numberOfTxAntennas )
-    error( 'input vector has wrong number of antennas' );
-end
+%if ( size( in, 2 ) ~= this.numberOfTxAntennas )
+%    error( 'input vector has wrong number of antennas' );
+%end
+% TESTE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+this.numberOfTxAntennas = size(in, 2);
 
 % calculate number of samples and time reference
 % output may have more samples on account of delayed paths
@@ -30,6 +32,12 @@ nSamplesIn = size( in, 1 );
 nSamplesPrev = size( this.previousFrame, 1 );
 nSamplesOut = nSamplesPrev + nSamplesIn + this.maxDelay_samples;
 out = zeros( nSamplesOut, this.numberOfRxAntennas );
+
+%%% TESTE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+if size(in, 2) == 2
+    this.previousFrame = [this.previousFrame, this.previousFrame];
+end
+
 
 in = [ this.previousFrame; in ]; 
 

@@ -58,15 +58,17 @@ switch ( this.channelEstimationAlgo )
         
         channelEstimationTime = this.channelEstimationTime + ...
                                 samplingInstantsIn(1);
+                            
+        %channel = zeros(fftSize, nInstants, nRxAnts, nTxAnts);
         
         for rxAnt = 1 : nRxAnts
             for txAnt = 1 : nTxAnts
                 if size( sampledChannel, 1 ) > 1
-                    channel = ...
+                    channel_aux = ...                            %%%%%%%%%%%%%%%%%%%%%
                         interp1 ( samplingInstantsIn, ...
                         sampledChannel( :, :, rxAnt, txAnt ), ...
                         channelEstimationTime, 'pchip', 'extrap' ).';
-                    channel = repmat( channel, 1, nInstants);
+                    channel(:,:,rxAnt, txAnt) = repmat( channel_aux, 1, nInstants); %%%%%%%%%%%%
                     
                 else
                     % ALTERED 05/Jun/2016
