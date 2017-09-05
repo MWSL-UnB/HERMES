@@ -1,10 +1,10 @@
-function [ rxSignalOut ] = combiner( rxSignal, channelInFreq )
+function [ rxSignalOut ] = combiner( this, rxSignal, channelInFreq )
 % Alamouti combining scheme for one receiving antenna and 2 transmitting
 % antennas.
 
 %% Parameters (olhar fillFrame e escolher o mesmo)
-space_time = 0; 
-space_frequency = 1;
+space_time = 1; 
+space_frequency = 0;
 
 %% RX signal after the combiner
 rxSignalOut =zeros(size(rxSignal));
@@ -27,8 +27,6 @@ elseif(space_time == 0 && space_frequency == 1)
                            channelInFreq(i,j,:, 2)*conj(rxSignal(i+1,j));
                 rxSignalOut(i+1,j) =  conj(channelInFreq(i,j,:, 2))*rxSignal(i,j) - ...
                            channelInFreq(i,j,:, 1)*conj(rxSignal(i+1,j));
-                display(i)
-                display(i+1)
             end
     end
 else

@@ -26,10 +26,10 @@ channelInFreq = this.getChannelInFrequency( rxSignal, ...
                                             impulseResponse, ...
                                             channelSamplingInstants );
                                                                           
-%if size(channelInFreq, 4)>1
-%   [rxSignal] = this.combine(rxSignal, impulseResponse);
-%    display('oi')
-%end
+if size(channelInFreq, 4)>1 % Alamouti combiner
+   [rxSignal] = this.combiner(rxSignal, channelInFreq);
+    display('oi')
+end
                                         
 [ rxSignal, coefficients ] = this.equalize( rxSignal, channelInFreq, ...
                                             noiseVariance );

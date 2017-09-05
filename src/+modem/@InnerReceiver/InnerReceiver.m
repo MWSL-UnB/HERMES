@@ -101,6 +101,7 @@ methods ( Access = 'public' )
         this.channelEstimationAlgo = channelEstimationAlgo;
         this.equalizationAlgo = equalizationAlgo;
         this.noiseEstimationAlgo = noiseEstimationAlgo;
+        
     end
     
     % end constructor
@@ -123,6 +124,7 @@ methods ( Access = 'protected' )
     
     noiseVariance = this.estimateNoise( noiseVariance, equalizerCoefficients );
     
+    [rxSignalOut] = combiner(this,rxSignal, channelInFreq); %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 end
 
 methods( Abstract,  Access = 'protected' )
