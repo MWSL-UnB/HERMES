@@ -41,8 +41,8 @@ fftSize = this.demodulator.fftSize;
 switch this.demodulator.waveform
     case enum.modem.fiveG.Waveform.OFDM
         
-        noiseVariancePerSymbol = fftSize * noiseVariance .* ...
-            ( real(coefficients).^2 + imag(coefficients).^2 );        
+        noiseVariancePerSymbol = fftSize * noiseVariance  .* ...
+           ( real(coefficients).^2 + imag(coefficients).^2 );  % TESTE     
         
     case enum.modem.fiveG.Waveform.ZT_DS_OFDM
         

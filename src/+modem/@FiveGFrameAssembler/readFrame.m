@@ -21,6 +21,9 @@ if isempty( this.numberOfAntennas )
     error('The number of Rx Antennas is not assigned in 5G Frame Assembler')
 end
 
+%%%% TESTE
+this.numberOfAntennas = 1; %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 % Initializes the output vector
 dataVector = zeros ( this.usedSymbols ,  this.numberOfAntennas  );
 noiseVarianceOutput = zeros ( this.usedSymbols ,  this.numberOfAntennas  );
@@ -44,10 +47,6 @@ switch this.numberOfAntennas
     case 2
         % Not implemented
         display('erro')
-    case 4
-        % Not implemented
-    case 8
-        % Not implemented
 end
 
 

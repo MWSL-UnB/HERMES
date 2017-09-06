@@ -42,8 +42,11 @@ function [ signalOut, ...
 
 switch this.equalizationAlgo
     case enum.modem.Equalization.ZF
-        
-        coefficients = 1 ./ channel;
+        if(size(channel, 4)>1)
+            coefficients = 1./(abs(channel(:,:,:,1)).^2 + abs(channel(:,:,:,2)).^2);
+        else
+            coefficients = 1 ./ channel;
+        end
                        
     case enum.modem.Equalization.MMSE
         % considering Es = 1
@@ -59,8 +62,14 @@ end
 
 
 
-signalOut = signalIn .* coefficients;
-
+ 
+if(size(coefficients, 4)>1)
+    %signalOut = signalIn; % TESTE %%%%%%%%%%%%%%%%%%%%%
+    coefficients = (coefficients(:,:,:,1).^2 + coefficients(:,:,:,2).^2);
+    signalOut = signalIn .* coefficients;
+else
+    signalOut = signalIn .* coefficients;
+end
 
 end
 
