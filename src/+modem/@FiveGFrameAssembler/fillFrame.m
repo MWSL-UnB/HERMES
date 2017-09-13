@@ -1,4 +1,4 @@
-function [ txFrame ] = fillFrame(this, dataVector )
+function [ txFrame ] = fillFrame(this, dataVector, spatialCodeRate )
 %FIVEGFRAMEASSEMBLER.FILLFRAME fills a frame with data
 %   Description at FrameAssembler class header
 %
@@ -17,11 +17,15 @@ function [ txFrame ] = fillFrame(this, dataVector )
 
 
 % Initialize the output Matrix (frameTx)
-txFrame = zeros( this.blockSize, this.numberOfBlocks );
+txFrame = zeros( this.blockSize, this.numberOfBlocks, spatialCodeRate ); %%%%% TESTE
 
 % Check the number of Tx Antennas
 switch this.numberOfAntennas
     case 1
+        if(spatialCodeRate ~= 1)
+            error('The spatialCodeRate must be 1 in order to transmit from a single antenna.')
+        end
+        
         this.usedSymbols = length(dataVector);
         %Assign data Symbols to the positions
         txFrame( this.dataPositions( 1 : this.usedSymbols ) ) = dataVector; 
@@ -53,7 +57,7 @@ switch this.numberOfAntennas
     case 2 %%%%% PARTIALLY COMPLETE
         this.usedSymbols = length(dataVector);
         %Assign data Symbols to the positions
-        txFrame( this.dataPositions( 1 : this.usedSymbols ) ) = dataVector; 
+        txFrame( this.dataPositions( 1 : this.usedSymbols )) = dataVector; 
         
         % assign random QPSK symbols to the control positions
         numberOfCtrlSymbols = length (this.controlPositions);
@@ -112,7 +116,7 @@ switch this.numberOfAntennas
                 txFrame2(i+1, :) = conj(txFrame(i, :));  
             end
         else
-            display('You must either choose STBC or SFBC');
+            display('Choose either STBC or SFBC');
         end
         
         % merging the transmitted symbols

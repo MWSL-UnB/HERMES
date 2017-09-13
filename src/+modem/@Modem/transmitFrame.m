@@ -19,6 +19,9 @@ function frame = transmitFrame( this )
 %   stipulated in the agreement/contract under which the program has been
 %   supplied.
 
+% TESTE
+%this.spatialCoder.spatialCodeRate = 2;
+
 % generate data packets
 numberOfSymbols = this.frameAssembler.getAvailableDataSymbols() ...
                     * this.spatialCoder.spatialCodeRate; %ALTERACAO REALIZADA
@@ -40,7 +43,7 @@ numberOfSymbols = this.frameAssembler.getAvailableDataSymbols() ...
     
     modulationSymbols = this.spatialCoder.precode( modulationSymbols );
     
-    frame = this.frameAssembler.fillFrame( modulationSymbols );
+    frame = this.frameAssembler.fillFrame( modulationSymbols, this.spatialCoder.spatialCodeRate );
     
     if ~isempty ( frame )
         frame = this.innerTransceiver.modulate( frame );

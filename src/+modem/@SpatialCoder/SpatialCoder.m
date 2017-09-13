@@ -92,7 +92,7 @@ methods( Access = 'public' )
         
         switch this.mimoScheme
             case enum.modem.MimoScheme.NONE
-                this.spatialCodeRate = 1;
+                this.spatialCodeRate = 1; %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                 this.doPrecode = @this.precodeNone;
                 this.doEqualize = @this.equalizeNone;
                 

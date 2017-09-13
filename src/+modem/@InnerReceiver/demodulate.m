@@ -26,7 +26,7 @@ channelInFreq = this.getChannelInFrequency( rxSignal, ...
                                             impulseResponse, ...
                                             channelSamplingInstants );
                                                                           
-if size(channelInFreq, 4)>1 % Alamouti combiner
+if size(channelInFreq, 4)>1 % Alamouti combiner e equalizer
    [rxSignal] = this.combiner(rxSignal, channelInFreq);
     display('oi')
 end

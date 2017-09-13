@@ -40,36 +40,29 @@ function [ signalOut, ...
 %   stipulated in the agreement/contract under which the program has been
 %   supplied.                             
 
+if(size(channel, 4)>1)
+    
+    channel = (abs(channel(:,:,:,1)).^2 + abs(channel(:,:,:,2)).^2);
+end 
+
 switch this.equalizationAlgo
     case enum.modem.Equalization.ZF
-        if(size(channel, 4)>1)
-            coefficients = 1./(abs(channel(:,:,:,1)).^2 + abs(channel(:,:,:,2)).^2);
-        else
-            coefficients = 1 ./ channel;
-        end
+        
+        coefficients = 1 ./ channel;
                        
     case enum.modem.Equalization.MMSE
         % considering Es = 1
-        
         coefficients = conj( channel ) ./ ...
-                       ( real( channel ).^2 + imag( channel ).^2 + ...
-                         noiseVariance );                  
+                        ( real( channel ).^2 + imag( channel ).^2 + ...
+                         noiseVariance );  
         
     otherwise
         error('equalization algorithm not supported')
         
 end
 
+signalOut = signalIn .* coefficients;
 
-
- 
-if(size(coefficients, 4)>1)
-    %signalOut = signalIn; % TESTE %%%%%%%%%%%%%%%%%%%%%
-    coefficients = (coefficients(:,:,:,1).^2 + coefficients(:,:,:,2).^2);
-    signalOut = signalIn .* coefficients;
-else
-    signalOut = signalIn .* coefficients;
-end
 
 end
 

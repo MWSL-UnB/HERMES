@@ -25,8 +25,8 @@ this.numberOfTxAntennas = nTx;
 nSamples = size( in, 1 );
 
 this.timeStamp = t0 + nSamples / this.samplingRate;
-impulseResponse0 = eye( this.numberOfRxAntennas, this.numberOfTxAntennas );%%%%%%%%%%% 
-out = ( in * impulseResponse0.' ); %%%%%%%%%%
+impulseResponse0 = eye( this.numberOfRxAntennas, this.numberOfTxAntennas ); 
+out = ( in * impulseResponse0.' ); 
 
 frameDuration = nSamples / this.samplingRate;
 t = t0 + ( 0 : this.impulseResponseUpdatePeriod : frameDuration );
