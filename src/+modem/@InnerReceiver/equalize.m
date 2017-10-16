@@ -41,7 +41,6 @@ function [ signalOut, ...
 %   supplied.                             
 
 if(size(channel, 4)>1)
-    
     channel = (abs(channel(:,:,:,1)).^2 + abs(channel(:,:,:,2)).^2);
 end 
 

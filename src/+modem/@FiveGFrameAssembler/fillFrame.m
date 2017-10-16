@@ -84,8 +84,8 @@ switch this.numberOfAntennas
         txFrame(:, guardBlocks ) = [];
         
         %%%%%%%%% ALAMOUTI PARAMETERS %%%%%%%%%%%%%%%%%
-        space_time_coding = 0;
-        space_frequency_coding = 1;
+        space_time_coding = 1;
+        space_frequency_coding = 0;
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         
         % separating the frames to be transmitted by the 2 antennas 

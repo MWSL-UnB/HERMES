@@ -25,6 +25,7 @@ function [ out, ...
 %end
 % TESTE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 this.numberOfTxAntennas = size(in, 2);
+this.numberOfRxAntennas = 2;
 
 % calculate number of samples and time reference
 % output may have more samples on account of delayed paths
