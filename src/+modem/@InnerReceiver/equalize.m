@@ -41,7 +41,15 @@ function [ signalOut, ...
 %   supplied.                             
 
 if(size(channel, 4)>1)
-    channel = (abs(channel(:,:,:,1)).^2 + abs(channel(:,:,:,2)).^2);
+    numberOfRxAntennas = size(channel, 3);
+    mimoChannel = zeros(size(signalIn));
+    
+    for rxAntCount = 1:1:numberOfRxAntennas
+        auxChannel = (abs(channel(:,:,rxAntCount,1)).^2 + abs(channel(:,:,rxAntCount,2)).^2);
+        
+        mimoChannel = mimoChannel + auxChannel;
+    end
+    channel = mimoChannel;
 end 
 
 switch this.equalizationAlgo
