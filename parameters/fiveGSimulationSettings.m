@@ -31,7 +31,7 @@ FIVEG.FFT_SIZE = 2048;
 FIVEG.USEFUL_SUBCARRIERS = 1650;
 
 % waveform, see allowed values in +enum/+modem/+fiveG/Waveform.m
-FIVEG.WAVEFORM.TYPE = enum.modem.fiveG.Waveform.OFDM;
+FIVEG.WAVEFORM.TYPE = enum.modem.fiveG.Waveform.FOFDM;
 
 % OFDM parameters,
 % samples in cyclic prefix
@@ -73,6 +73,9 @@ FIVEG.RFIMPAIRMENTS.PHASE_NOISE.ENABLE = 0;
 FIVEG.RFIMPAIRMENTS.PHASE_NOISE.VARIANCE = 1.33; % Variance of the phase noise
 FIVEG.RFIMPAIRMENTS.PHASE_NOISE.RATIO = 2.5; % Phase noise bandwidth over the subcarrier spacing
 
+%% fOfDM window method
+FIVEG.FOFDMWINDOW ="hann";
+
 %% Define frame structure
 
 % frameType, see allowed values in +enum/+modem/+fiveG/FrameType.m
@@ -110,8 +113,8 @@ FIVEG.TRANSPORT_BLOCK_SIZE_BITS = 4000;
 
 
 %% Define MCS Parameters.
-FIVEG.MCS = 2;  % See Table in lookupTables.modem.fiveG.getMcsParam %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-FIVEG.CODE.TYPE = enum.modem.CodeType.TURBO;
+FIVEG.MCS = 4;  % See Table in lookupTables.modem.fiveG.getMcsParam %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+FIVEG.CODE.TYPE = enum.modem.CodeType.TURBO; %TURBO, NONE, CONVOLUTIONAL
 FIVEG.CODE.TURBO.ITERATIONS = 4;
 
 

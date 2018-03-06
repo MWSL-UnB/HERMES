@@ -101,6 +101,8 @@ paramTable.addParameter( 'RFIMPAIRMENTS.PHASE_NOISE.ENABLE', 'uint32');
 paramTable.addParameter( 'RFIMPAIRMENTS.PHASE_NOISE.VARIANCE', 'double');
 
 paramTable.addParameter( 'RFIMPAIRMENTS.PHASE_NOISE.RATIO', 'double');
+
+paramTable.addParameter( 'FOFDMWINDOW', 'string');
                      
 paramTable.addParameter( 'FRAME_TYPE', 'enum.modem.fiveG.FrameType', ...
                          enum.parameterCheck.Property.IS_MANDATORY );

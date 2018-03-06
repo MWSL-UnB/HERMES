@@ -71,6 +71,10 @@ while ~metStopCriteria
                                          txModem.transmitFrame() ];
             end
         end
+        
+        %shifting txSignal{2} for simulation purposes. Erase this later
+%         txSignal{2} = circshift(txSignal{2}, ceil(length(txSignal{2})/100));
+        txSignal{2} = [zeros(1, 30)'; txSignal{2}];
 
 
 

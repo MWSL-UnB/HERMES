@@ -57,6 +57,7 @@ properties ( GetAccess = 'public', SetAccess = 'protected')
     usefulSubcarriers
     fofdmFilterInTime
     rfImpairments
+    fOFDMWindow
     
 end
 
@@ -124,10 +125,11 @@ methods (Access = public)
                                        this.filterTail/this.frame.numberOfUsefulBlocks;
                                               
             case enum.modem.fiveG.Waveform.FOFDM
+                this.fOFDMWindow = FIVEG.FOFDMWINDOW;
                 this.samplesInSymbol = FIVEG.FFT_SIZE + ...
                                        FIVEG.WAVEFORM.OFDM.CYCLIC_PREFIX;
                 this.samplesInPrefix = FIVEG.WAVEFORM.OFDM.CYCLIC_PREFIX;
-                this.fofdmFilterInTime = fofdmFilter(this, this.fftSize);
+                this.fofdmFilterInTime = fofdmFilter(this, this.fftSize, this.fOFDMWindow);
                 
             otherwise
                 error('waveform not supported')
