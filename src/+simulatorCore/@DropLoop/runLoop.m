@@ -4,7 +4,7 @@ function runLoop( this, statistics, scenario )
 %
 %   Author: Erika Portela Lopes de Almeida (EA), Fadhil Firyaguna (FF),
 %           Andre Noll Barreto (ANB)
-%   Work Address: INDT Brasília
+%   Work Address: INDT Brasï¿½lia
 %   E-mail: erika.almeida@indt.org.br, fadhil.firyaguna@indt.org,
 %           andre.noll@indt.org
 %   History:
@@ -73,8 +73,8 @@ while ~metStopCriteria
         end
         
         %shifting txSignal{2} for simulation purposes. Erase this later
-%         txSignal{2} = circshift(txSignal{2}, ceil(length(txSignal{2})/100));
-        txSignal{2} = [zeros(1, 30)'; txSignal{2}];
+        % txSignal{2} = circshift(txSignal{2}, ceil(length(txSignal{2})/25));
+        % txSignal{2} = [zeros(1, 30)'; txSignal{2}];
 
 
 

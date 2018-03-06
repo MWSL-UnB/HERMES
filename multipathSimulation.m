@@ -1,6 +1,6 @@
 clear all
-updateMultipath("NONE")
-lucasFolder = "windowsSimulationsResults\Shift2.0\Delay100th\";
+updateMultipath("RURAL_AREA")
+lucasFolder = "windowsSimulationsResults\multipath2.0\rural_area\";
 
 %% OFDM
 fprintf("OFDM STARTED \n")
@@ -20,32 +20,32 @@ clear statistics;
 save(strcat(lucasFolder, "hann.mat"))
 fprintf("HANNING FINISHED \n")
 
-% %% Blackman
-% fprintf("BLACKMAN STARTED \n")
-% updatefOFDMWindow("black");
-% hermes;
-% black_statistics = gBSimSaveResults(statistics);
-% clear statistics;
-% save(strcat(lucasFolder, "black.mat"))
-% fprintf("BLACKMAN FINISHED \n")
+%% Blackman
+fprintf("BLACKMAN STARTED \n")
+updatefOFDMWindow("black");
+hermes;
+black_statistics = gBSimSaveResults(statistics);
+clear statistics;
+save(strcat(lucasFolder, "black.mat"))
+fprintf("BLACKMAN FINISHED \n")
 % 
-% %% Kaiser
-% fprintf("KAISER STARTED \n")
-% updatefOFDMWindow("kaiser");
-% hermes;
-% kaiser_statistics = gBSimSaveResults(statistics);
-% clear statistics;
-% save(strcat(lucasFolder, "kaiser.mat"))
-% fprintf("KAISER FINISHED \n")
+%% Kaiser
+fprintf("KAISER STARTED \n")
+updatefOFDMWindow("kaiser");
+hermes;
+kaiser_statistics = gBSimSaveResults(statistics);
+clear statistics;
+save(strcat(lucasFolder, "kaiser.mat"))
+fprintf("KAISER FINISHED \n")
 % 
-% %% Rectangular
-% fprintf("RECTANGULAR STARTED \n")
-% updatefOFDMWindow("rect");
-% hermes;
-% rect_statistics = gBSimSaveResults(statistics);
-% clear statistics;
-% save(strcat(lucasFolder, "rect.mat"))
-% fprintf("RECTANGULAR FINISHED \n")
+%% Rectangular
+fprintf("RECTANGULAR STARTED \n")
+updatefOFDMWindow("rect");
+hermes;
+rect_statistics = gBSimSaveResults(statistics);
+clear statistics;
+save(strcat(lucasFolder, "rect.mat"))
+fprintf("RECTANGULAR FINISHED \n")
 
 %% Others
 % updatefOFDMWindow('hamm');

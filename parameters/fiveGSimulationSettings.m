@@ -23,12 +23,12 @@ clear FIVEG
 %% Define modulation parameters
 
 % subcarrier spacing in Hz
-FIVEG.SUBCARRIER_SPACING = 60e3;
+FIVEG.SUBCARRIER_SPACING = 15e3; %original 60e3
 
-FIVEG.FFT_SIZE = 2048;
+FIVEG.FFT_SIZE = 512; %original 1024
 
 % number of subcarriers, i.e., except null subcarriers (must be even)
-FIVEG.USEFUL_SUBCARRIERS = 1650;
+FIVEG.USEFUL_SUBCARRIERS = 400; %original 1650
 
 % waveform, see allowed values in +enum/+modem/+fiveG/Waveform.m
 FIVEG.WAVEFORM.TYPE = enum.modem.fiveG.Waveform.FOFDM;
@@ -74,7 +74,7 @@ FIVEG.RFIMPAIRMENTS.PHASE_NOISE.VARIANCE = 1.33; % Variance of the phase noise
 FIVEG.RFIMPAIRMENTS.PHASE_NOISE.RATIO = 2.5; % Phase noise bandwidth over the subcarrier spacing
 
 %% fOfDM window method
-FIVEG.FOFDMWINDOW ="hann";
+FIVEG.FOFDMWINDOW ="rect";
 
 %% Define frame structure
 
@@ -113,13 +113,13 @@ FIVEG.TRANSPORT_BLOCK_SIZE_BITS = 4000;
 
 
 %% Define MCS Parameters.
-FIVEG.MCS = 4;  % See Table in lookupTables.modem.fiveG.getMcsParam %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-FIVEG.CODE.TYPE = enum.modem.CodeType.TURBO; %TURBO, NONE, CONVOLUTIONAL
+FIVEG.MCS = 1;  % See Table in lookupTables.modem.fiveG.getMcsParam %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+FIVEG.CODE.TYPE = enum.modem.CodeType.NONE; %TURBO, NONE, CONVOLUTIONAL
 FIVEG.CODE.TURBO.ITERATIONS = 4;
 
 
 %% Define HARQ Parameters
-FIVEG.HARQ.ENABLED = true;              % True or False
+FIVEG.HARQ.ENABLED = false;              % True or False
 FIVEG.HARQ.MAX_RETX_TIMER = 1;          % Time taken to retx the packet
 % (in number of simulation loops),
 % after receiving a NACK.
