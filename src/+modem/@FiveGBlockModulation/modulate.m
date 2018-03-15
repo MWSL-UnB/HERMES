@@ -3,7 +3,7 @@ function modulatedSignal = modulate( this, transmittedFrame )
 %   Detailed explanation is given in the BlockModulation class header.
 %
 %   Author: Andre Noll Barreto (AB)
-%   Work Address: INDT Brasília
+%   Work Address: INDT Brasï¿½lia
 %   E-mail: andre.noll@indt.org
 %   History:
 %       v2.0 22 Apr 2015 (AB) - created
@@ -91,9 +91,9 @@ switch this.waveform
         
         % Passing the signal through the filter
         signalInTime = conv(signalInTime, this.fofdmFilterInTime); % Filtering
-        signalInTime = signalInTime(this.fftSize/2:length(signalInTime)-this.fftSize/2); % Removing the expanded samples after filtering                
+         
+        signalInTime = signalInTime( this.fOFDMfilterOrder/2 + 1 :  length(signalInTime) - this.fOFDMfilterOrder/2); % Removing the expanded samples after filtering                
         
-
 end
 
 

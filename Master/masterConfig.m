@@ -14,7 +14,7 @@ largo.usefulSubcarriers =  1650;
 largo.subcarriersSpacing = 15e3;
 largo.TransportBlockSizeBits = 4000;
 largo.dropsDuration = 0.005;
-largo.flag = lengthEnum.largo;
+largo.flag = lengthEnum.medio;
 
 %estreito
 estreito.fftSize = 64;

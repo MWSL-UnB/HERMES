@@ -34,7 +34,7 @@ classdef FiveGBlockModulation < modem.BlockModulation
 %   Other methods described in BlockModulation class header
 %
 %   Author: Andre Noll Barreto (AB)
-%   Work Address: INDT Brasília
+%   Work Address: INDT Brasï¿½lia
 %   E-mail: andre.noll@indt.org
 %   History:
 %       v2.0 22 Apr 2015 (AB) - created
@@ -58,7 +58,7 @@ properties ( GetAccess = 'public', SetAccess = 'protected')
     fofdmFilterInTime
     rfImpairments
     fOFDMWindow
-    
+    fOFDMfilterOrder    
 end
 
 properties (Access = 'protected')
@@ -125,11 +125,12 @@ methods (Access = public)
                                        this.filterTail/this.frame.numberOfUsefulBlocks;
                                               
             case enum.modem.fiveG.Waveform.FOFDM
+                this.fOFDMfilterOrder = FIVEG.FOFDMFILTERORDER;
                 this.fOFDMWindow = FIVEG.FOFDMWINDOW;
                 this.samplesInSymbol = FIVEG.FFT_SIZE + ...
                                        FIVEG.WAVEFORM.OFDM.CYCLIC_PREFIX;
                 this.samplesInPrefix = FIVEG.WAVEFORM.OFDM.CYCLIC_PREFIX;
-                this.fofdmFilterInTime = fofdmFilter(this, this.fftSize, this.fOFDMWindow);
+                this.fofdmFilterInTime = fofdmFilter(this, this.fOFDMfilterOrder, this.fOFDMWindow);
                 
             otherwise
                 error('waveform not supported')

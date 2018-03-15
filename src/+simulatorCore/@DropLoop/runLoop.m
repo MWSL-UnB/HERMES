@@ -73,9 +73,9 @@ while ~metStopCriteria
         end
         
         %shifting txSignal{2} for simulation purposes. Erase this later
-        txSignal{2} = circshift(txSignal{2}, ceil(length(txSignal{2})/2));
+txSignal{2} = circshift(txSignal{2}, ceil(length(txSignal{2})/2));
         % txSignal{2} = [zeros(ceil(length(txSignal{2})/2), 1); txSignal{2}];
-        txSignal{2} = 3 * txSignal{2};
+        txSignal{2} = 10 * txSignal{2};
 
 
 

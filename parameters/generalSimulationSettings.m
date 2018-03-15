@@ -57,7 +57,7 @@ SETTINGS.SNR.TYPE = enum.snr.Type.EBNO;
 
 % SNR values to be used to create the BLER curves in dB. Its type is
 % defined by parameter SETTINGS.SNR.TYPE
-SETTINGS.SNR.VECTOR_dB =10;
+SETTINGS.SNR.VECTOR_dB =0:1:12;
 
 
 % display options

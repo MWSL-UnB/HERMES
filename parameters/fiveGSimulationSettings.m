@@ -133,3 +133,6 @@ FIVEG.HARQ.MAX_NUM_OF_RV = 4; % Number of Redundancy Versions Available.
 FIVEG.DL_LOAD_RATIO = 0.75; % In interval [ 0 , 1 ]. It measures the amount of
 % cell load correspondent to DL.
 % UL LOAD = 1 - ( DL LOAD ).
+
+%%fOFDM filter order
+FIVEG.FOFDMFILTERORDER = 20000;

@@ -3,7 +3,7 @@
 %   Detailed explanation is given in the BlockModulation class header.
 %   
 %   Author: Andre Noll Barreto (ANB)
-%   Work Address: INDT Brasília
+%   Work Address: INDT Brasï¿½lia
 %   E-mail: andre.noll@indt.org
 %   History:
 %       v1.0 23 Apr 2015 (ANB) - created
@@ -75,7 +75,7 @@ for antCount = 1 : this.numberOfAntennas
         if this.waveform == enum.modem.fiveG.Waveform.FBMC   
             [ rxSignal, ...
               this.prototypeFilter.polyphaseAnalysisFilter ] = ...
-              analysisFilterBank( this, rxSignal ); 
+              analysisFilterBank( this, rxSignal );
                % Remove Filter Delays
                rxSignal = rxSignal(:,2*this.prototypeFilter.filterParameters.K ...
                -1:end-(2*this.prototypeFilter.filterParameters.K-1)+1);
@@ -84,7 +84,7 @@ for antCount = 1 : this.numberOfAntennas
         if this.waveform == enum.modem.fiveG.Waveform.FOFDM
             % passing the recovered signal through the filter
             rxSignal = conv(rxSignal, this.fofdmFilterInTime); % filtering
-            rxSignal = rxSignal(this.fftSize/2+2:length(rxSignal)-this.fftSize/2+2); % removing the expanded samples after filtering
+            rxSignal = rxSignal( this.fOFDMfilterOrder/2 + 1: length(rxSignal) - this.fOFDMfilterOrder/2); % removing the expanded samples after filtering            
             
             % remove cyclic prefix
             rxSignal = reshape( rxSignal, this.samplesInSymbol, ...
