@@ -2,8 +2,8 @@
 %
 %   Syntax: generalSimulationSettings.m
 %
-%   Authors: Lilian Freitas (LCF), Erika Almeida (EA), André Noll Barreto (ANB)
-%   Work Address: INDT Manaus/Brasília
+%   Authors: Lilian Freitas (LCF), Erika Almeida (EA), Andrï¿½ Noll Barreto (ANB)
+%   Work Address: INDT Manaus/Brasï¿½lia
 %   E-mail: <lilian.freitas, erika.almeida, andre.noll>@indt.org
 %   History:
 %      v1.0 04 Mar 2015 (LCF, EA, ANB) - created
@@ -21,7 +21,7 @@ clear SETTINGS
 % ========================================================================
 
 % drop duration in seconds.
-SETTINGS.DROPS.DURATION = .005;
+SETTINGS.DROPS.DURATION =0.005;
 
 % simulation stopping criteria
 SETTINGS.DROPS.STOPPING_CRITERIA = ...
@@ -57,7 +57,7 @@ SETTINGS.SNR.TYPE = enum.snr.Type.EBNO;
 
 % SNR values to be used to create the BLER curves in dB. Its type is
 % defined by parameter SETTINGS.SNR.TYPE
-SETTINGS.SNR.VECTOR_dB =0:10/12:10;
+SETTINGS.SNR.VECTOR_dB =10;
 
 
 % display options
@@ -134,11 +134,11 @@ SETTINGS.SCENARIO.MODEM{ 3 }.ANTENNA_TYPE = enum.antenna.AntennaType.ISOTROPIC; 
 % represents two links, formed by Modems 1-3 and 2-4 respectively.
 SETTINGS.SCENARIO.MAIN.TX_MODEMS = 1;
 SETTINGS.SCENARIO.MAIN.RX_MODEMS = 2;
-SETTINGS.SCENARIO.MAIN.TX_MODEMS = 3; %NOVO
+% SETTINGS.SCENARIO.MAIN.TX_MODEMS = 3; %NOVO
 
 
 % carrier frequency in Hertz
-SETTINGS.SCENARIO.CARRIERS_DISTANCE =100000000;
+SETTINGS.SCENARIO.CARRIERS_DISTANCE =6015000;
 % SETTINGS.SCENARIO.CARRIERS_DISTANCE =99120000;
 SETTINGS.SCENARIO.MODEM{1}.CARRIER_FREQUENCY = 2.5e9;
 SETTINGS.SCENARIO.MODEM{2}.CARRIER_FREQUENCY = ...

@@ -14,7 +14,7 @@ function updateEbNo( EbNo )
     end
     fclose(fid);
     % Change cell A    
-    str = strcat('SETTINGS.SNR.VECTOR_dB =',num2str(EbNo),';');
+    str = strcat('SETTINGS.SNR.VECTOR_dB =', EbNo,';');
     A{60} = sprintf('%s',str);
     % Write cell A into txt
     fid = fopen('parameters/generalSimulationSettings.m', 'w');

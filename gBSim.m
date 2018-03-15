@@ -1,8 +1,8 @@
-function [gBSimResults] = gBSim(maxGuardBand, snrdB, pointsCount)
+function [gBSimResults] = gBSim(signalBand, maxGuardBand, snrdB, pointsCount)
 
     %% Initialize gBSimResults struct
 
-    gBSimResults.signalBand = 99e6;     %signal bandwidth. Both signals have the same bandwidth
+    gBSimResults.signalBand = signalBand;     %signal bandwidth. Both signals have the same bandwidth
     gBSimResults.guardBand = maxGuardBand;      %guardband between signals. 1 tone = 15e3.
     gBSimResults.carriersDistance = gBSimResults.signalBand + gBSimResults.guardBand;       % max distance between signals' center frequencies
     gBSimResults.evaluatedEbNo = snrdB;        %Eb/No ratio for which the BER will be stored    
@@ -13,7 +13,7 @@ function [gBSimResults] = gBSim(maxGuardBand, snrdB, pointsCount)
 
     % uncomment this to simulate in function of the distance between central
     % frequencies
-    % gBSimResults.CarriersDistancesVector = 0:(gBSimResults.carriersDistance/10):gBSimResults.carriersDistance;      
+    % gBSimResults.CarriersDistancesVector = 0:(gBSimResults.carriersDistance/numberOfPoints):gBSimResults.carriersDistance;      
 
     % uncomment this to simulate in function of the guarband between signals
     gBSimResults.CarriersDistancesVector = gBSimResults.signalBand:(gBSimResults.guardBand/numberOfPoints):gBSimResults.carriersDistance;      

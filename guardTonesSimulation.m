@@ -2,7 +2,7 @@ clear all;
 updateMultipath("NONE")
 lucasFolder = "windowsSimulationsResults\guardTones2.0\2db\";
 max_GuardBand = 60e3; %1 tone = 15e3
-snr_dB = 2;
+snr_dB = "2";
 points = 12;
 
 %% OFDM

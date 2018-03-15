@@ -22,8 +22,8 @@ function statistics = hermesStart( inputParametersDir, resultsDirectory, ...
 %       STATISTICS - object containing all the simulation statistics
 %
 %
-%   Author: Erika Portela Lopes de Almeida, André Noll Barreto
-%   Work Address: INDT Brasília
+%   Author: Erika Portela Lopes de Almeida, Andrï¿½ Noll Barreto
+%   Work Address: INDT Brasï¿½lia
 %   E-mail: erika.almeida@indt.org.br, andre.noll@indt.org
 %   History:
 %       05 Feb 2015 (EA) - created
@@ -136,5 +136,6 @@ else
 end
 
 fprintf('results saved in %s\n', resultsDirectory );
+% fprintf('HERMES finished');
 
 end
